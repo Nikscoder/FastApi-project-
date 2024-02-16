@@ -4,18 +4,15 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-
 class Item(BaseModel):
     name: str
     price: float
     brand: Optional[str] = None
 
-
 class UpdateItem(BaseModel):
     name: Optional[str] = None
     price: Optional[str] = None
     brand: Optional[str] = None
-
 
 inventory = {}
 
@@ -25,6 +22,7 @@ def get_item(item_id: int):
     if item_id not in inventory:
         return {"ERROR": "ID does not exist in inventory"}
     return inventory[item_id]
+
 
 #GET request
 @app.get("/get-by-name/{item_id}")
@@ -84,8 +82,3 @@ def about():
 @app.get("/all_invent")
 def all_invent():
     return inventory
-
-# unicorn is a webserver for fast api
-
-# http://127.0.0.1:8000/docs#/
-#& "C:\Users\Nikita\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts\uvicorn.exe" main:app --reload
